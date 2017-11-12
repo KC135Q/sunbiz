@@ -23,7 +23,11 @@ module.exports = function(app) {
     });
 
     app.get("/api/association", function(req, res) {
-            res.json([{business_id: 1, agent_id: 1, role: "author"}])
+            // res.json([{business_id: 1, agent_id: 1, role: "author"}])
+        db.agent_business.findAll()
+            .then(function(dbAB) {
+                res.json(dbAB);
+            });
     });
 
     app.post("/api/:agent/:business/:role", function(req, res) {
@@ -55,7 +59,6 @@ module.exports = function(app) {
                 res.redirect("/");
             });
     });
-
 
     app.get("/api/business", function(req, res) {
         db.business.findAll()
